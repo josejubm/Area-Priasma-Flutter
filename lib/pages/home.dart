@@ -39,7 +39,7 @@ class HomePageState extends State<Home> {
   Widget build(BuildContext contex) {
     return new Scaffold(
       appBar: new AppBar(
-        title: const Text("Convertidor De Dolares a Pesos"),
+        title: const Text("Convertidor De Dólares a Pesos"),
       ),
       body: new Container(
         padding: const EdgeInsets.all(40.0),
@@ -48,7 +48,7 @@ class HomePageState extends State<Home> {
           children: <Widget>[
             // ignore: prefer_const_constructors
             new Text(
-                "Ingrese la Cantidad de dolares que desea convertir junto con el valor por unidad",
+                "Ingrese la Cantidad de dólares que desea convertir junto con el valor por unidad",
                 style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class HomePageState extends State<Home> {
             ),
             new TextField(
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: "Dolares : "),
+              decoration: const InputDecoration(labelText: "Dólares : "),
               controller: avg1,
             ),
             const Padding(
@@ -67,7 +67,7 @@ class HomePageState extends State<Home> {
             new TextField(
               keyboardType: TextInputType.number,
               decoration:
-                  const InputDecoration(labelText: "Valor o Costo Por Dolar:"),
+                  const InputDecoration(labelText: "Valor o Costo Por Dólar:"),
               controller: avg2,
             ),
             const Padding(
@@ -78,7 +78,7 @@ class HomePageState extends State<Home> {
               color: Colors.green,
               size: 30.0,
             ),
-            new Text("$dolares Dolares Es Igual a $resultado Pesos",
+            new Text("$dolares Dólares Es Igual a $resultado Pesos",
                 style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
