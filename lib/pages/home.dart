@@ -12,79 +12,129 @@ class Home extends StatefulWidget {
 }
 
 class HomePageState extends State<Home> {
-  var dolares = 0.0, costo = 0.0, resultado = 0.0;
+  var areaTotal = 0.0,
+      volumen = 0.0,
+      areaLateral = 0.0,
+      areaBase = 0.0,
+      lados = 0.0,
+      valorLado = 0.0,
+      perimetro = 0.0,
+      apotema = 0.0,
+      altura = 0.0;
 
   final TextEditingController avg1 = TextEditingController(text: "");
   final TextEditingController avg2 = TextEditingController(text: "");
+  final TextEditingController avg3 = TextEditingController(text: "");
+  final TextEditingController avg4 = TextEditingController(text: "");
 
-  void doDolaresPesos() {
+  //OPERACIONES.
+  void doCalcular() {
     setState(() {
-      dolares = double.parse(avg1.text);
-      costo = double.parse(avg2.text);
+      lados = double.parse(avg1.text);
+      valorLado = double.parse(avg2.text);
+      apotema = double.parse(avg3.text);
+      altura = double.parse(avg4.text);
 
-      resultado = dolares * costo;
+      perimetro = valorLado * lados;
+      areaBase = perimetro * apotema / 2;
+      areaLateral = perimetro * altura;
+      areaTotal = areaLateral + 2 * areaBase;
+      volumen = areaBase * altura;
     });
   }
 
+//LIMPIAR CAMPOS.
   void doClear() {
     setState(() {
       avg1.text = "";
       avg2.text = "";
-      dolares = 0.0;
-      resultado = 0.0;
+      avg3.text = "";
+      avg4.text = "";
+      areaTotal = 0.0;
+      volumen = 0.0;
+      areaLateral = 0.0;
+      areaBase = 0.0;
     });
   }
+
+  final mainImage = Image.asset(
+    'images/mate.jpg',
+    //width: 400,
+    //height: 300,
+    fit: BoxFit.cover,
+  );
 
   @override
   Widget build(BuildContext contex) {
     return new Scaffold(
       appBar: new AppBar(
-        title: const Text("Convertidor De Dólares a Pesos"),
+        title: const Text("Calcular Áreas y Volumen de un Prisma "),
       ),
       body: new Container(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.all(50.0),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // ignore: prefer_const_constructors
-            new Text(
-                "Ingrese la Cantidad de dólares que desea convertir junto con el valor por unidad",
-                style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey)),
+            mainImage,
             const Padding(
-              padding: const EdgeInsets.only(top: 50.0),
+              padding: const EdgeInsets.only(top: 10.0),
             ),
             new TextField(
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: "Dólares : "),
+              decoration: const InputDecoration(labelText: "Numero de lados"),
               controller: avg1,
             ),
             const Padding(
-              padding: const EdgeInsets.only(top: 50.0),
+              padding: const EdgeInsets.only(top: 10.0),
             ),
             new TextField(
               keyboardType: TextInputType.number,
-              decoration:
-                  const InputDecoration(labelText: "Valor o Costo Por Dólar:"),
+              decoration: const InputDecoration(labelText: "Valor de Lado "),
               controller: avg2,
             ),
             const Padding(
-              padding: const EdgeInsets.only(top: 50.0),
+              padding: const EdgeInsets.only(top: 10.0),
             ),
-            const Icon(
-              Icons.attach_money_outlined,
-              color: Colors.green,
-              size: 30.0,
+            new TextField(
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: "Apotema "),
+              controller: avg3,
             ),
-            new Text("$dolares Dólares Es Igual a $resultado Pesos",
+            const Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+            ),
+            new TextField(
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: "Altura "),
+              controller: avg4,
+            ),
+            const Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+            ),
+
+            new Text("Volumen = $volumen cm³",
+                style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey)),
+            new Text("Área Total = $areaTotal cm²",
+                style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey)),
+            new Text("Área Lateral = $areaLateral cm²",
+                style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey)),
+            new Text("Área Base = $areaBase cm²",
                 style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.blueGrey)),
             const Padding(
-              padding: const EdgeInsets.only(top: 50.0),
+              padding: const EdgeInsets.only(top: 30.0),
             ),
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -95,9 +145,9 @@ class HomePageState extends State<Home> {
                   size: 30.0,
                 ),
                 new MaterialButton(
-                  child: const Text("Convertir"),
+                  child: const Text("Calcular"),
                   color: Colors.green,
-                  onPressed: doDolaresPesos,
+                  onPressed: doCalcular,
                 ),
                 const Icon(
                   Icons.close_outlined,
