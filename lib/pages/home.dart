@@ -43,6 +43,45 @@ class HomePageState extends State<Home> {
     });
   }
 
+  bool isChecked = false;
+  bool isChecked2 = false;
+
+  var resultHolder = 'Mostrar Area Lateral?';
+
+  void toggleCheckbox(bool value) {
+    if (isChecked == false) {
+      // Put your code here which you want to execute on CheckBox Checked event.
+      setState(() {
+        isChecked = true;
+        resultHolder = "Área Lateral = $areaLateral cm²";
+      });
+    } else {
+      // Put your code here which you want to execute on CheckBox Un-Checked event.
+      setState(() {
+        isChecked = false;
+        resultHolder = 'Mostrar Area Lateral?';
+      });
+    }
+  }
+
+  var resultHolder2 = 'Mostrar Area Base?    ';
+
+  void toggleCheckbox2(bool value2) {
+    if (isChecked2 == false) {
+      // Put your code here which you want to execute on CheckBox Checked event.
+      setState(() {
+        isChecked2 = true;
+        resultHolder2 = "Área Base = $areaBase cm²   ";
+      });
+    } else {
+      // Put your code here which you want to execute on CheckBox Un-Checked event.
+      setState(() {
+        isChecked2 = false;
+        resultHolder2 = "Mostrar Area Base?   ";
+      });
+    }
+  }
+
 //LIMPIAR CAMPOS.
   void doClear() {
     setState(() {
@@ -58,7 +97,7 @@ class HomePageState extends State<Home> {
   }
 
   final mainImage = Image.asset(
-    'images/mate.jpg',
+    'images/prisma.jpg',
     //width: 400,
     //height: 300,
     fit: BoxFit.cover,
@@ -123,16 +162,45 @@ class HomePageState extends State<Home> {
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.blueGrey)),
-            new Text("Área Lateral = $areaLateral cm²",
-                style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey)),
-            new Text("Área Base = $areaBase cm²",
-                style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey)),
+
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Transform.scale(
+                scale: 1.2,
+                child: Checkbox(
+                  value: isChecked,
+                  onChanged: (value) {
+                    toggleCheckbox(value!);
+                  },
+                  activeColor: Colors.pink,
+                  checkColor: Colors.white,
+                  tristate: false,
+                ),
+              ),
+              Text('$resultHolder',
+                  style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueGrey))
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Transform.scale(
+                scale: 1.2,
+                child: Checkbox(
+                  value: isChecked2,
+                  onChanged: (value2) {
+                    toggleCheckbox2(value2!);
+                  },
+                  activeColor: Colors.pink,
+                  checkColor: Colors.white,
+                  tristate: false,
+                ),
+              ),
+              Text('$resultHolder2',
+                  style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueGrey))
+            ]),
             const Padding(
               padding: const EdgeInsets.only(top: 30.0),
             ),
